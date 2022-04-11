@@ -41,7 +41,7 @@ class Error
    
 
   public:
-    //Error(const &Error) = delete;
+    Error(const Error&) = delete;
 
     /* PUBLIC INTERFACE */
     static Error& Get() { return instance; }
