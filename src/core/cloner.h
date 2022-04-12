@@ -31,7 +31,7 @@ class Cloner
     // Getters.
     string IGetInputFile() { return InputFile; }
     string IGetOutputFile() { return OutputFile; }
-    string IGetBlockSize() { return BlockSize; }
+    size_t IGetBlockSize() { return BlockSize; }
 
     // Setters.
     status ISetInputFile(const string& file);
@@ -54,14 +54,14 @@ class Cloner
     static Cloner& Get(){ return instance; }
 
     // Public setters.
-    static status InputFile(const string& file);
-    static status OutputFile(const string& file);
-    static status BlockSize(size_t size);
+    static status SetInputFile(const string& file);
+    static status SetOutputFile(const string& file);
+    static status SetBlockSize(size_t size);
     
     // Public
-    static string InputFile();
-    static string OutputFile();
-    static size_t BlockSize();
+    static string GetInputFile(void);
+    static string GetOutputFile(void);
+    static size_t GetBlockSize(void);
 
     static status Run();
     static status Stop();
