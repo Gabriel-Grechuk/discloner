@@ -12,7 +12,7 @@ enum ErrorLevel : short int
   runtime = 2,
   io = 1, 
   ok = 0,
-  critial = -1,
+  critical = -1,
   fatal = -2
 };
 
