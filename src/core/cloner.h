@@ -20,22 +20,23 @@ class Cloner
     /* DATA */
     static Cloner instance; // The only instance of this class in the entire program.
 
-    string InputFile = "";
-    string OutputFile = "";
-    size_t BlockSize = 512;
-    
+    string InputFile;
+    string OutputFile;
+    size_t BlockSize;
 
 
     /* INTERNAL METHODS */
+    Cloner();
+
     // Getters.
     string IGetInputFile() { return InputFile; }
     string IGetOutputFile() { return OutputFile; }
     string IGetBlockSize() { return BlockSize; }
 
     // Setters.
-    void ISetInputFile(string file);
-    void ISetOutputFile(string file);
-    void ISetBlockSize(size_t size);
+    status ISetInputFile(const string& file);
+    status ISetOutputFile(const string& file);
+    status ISetBlockSize(size_t size);
 
     // Validates the internal data before running.
     status IValidateData();
@@ -46,15 +47,16 @@ class Cloner
 
   public:
     // Making sure that it can't be initiated by a copy constructor.
-    Cloner(const &Cloner) = delete;
+    Cloner(const Cloner&) = delete;
+    Cloner& operator= (const Cloner&) = delete;
 
     /* PUBLIC INTERFACE */
     static Cloner& Get(){ return instance; }
 
     // Public setters.
-    static void InputFile(string file);
-    static void OutputFile(string file);
-    static void BlockSize(size_t size);
+    static status InputFile(const string& file);
+    static status OutputFile(const string& file);
+    static status BlockSize(size_t size);
     
     // Public
     static string InputFile();
