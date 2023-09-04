@@ -33,3 +33,6 @@
 
 # Some temporary files
 *.tmp
+
+# Default build dir.
+build/
