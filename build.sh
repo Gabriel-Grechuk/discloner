@@ -5,23 +5,21 @@ command -v gcc >/dev/null 2>&1 || { echo "GCC não está instalado. Abortando co
 
 build()
 {
-  echo "Not implemented yet."
-  #echo "Building..."
-  #mkdir -p build
-  #cd build
-  #cmake ../src
-  #make
-  #cp cstock ../
-  #echo "Done."
+  echo "Building..."
+  mkdir -p build
+  cd build
+  cmake ../
+  make
+  cp discloner ../
+  echo "Done."
 }
 
 clean()
 {
-  echo "Not implemented yet."  
-  #echo "Cleaning..."
-  #rm -r build
-  #rm -r cstock
-  #echo "Done."
+  echo "Cleaning..."
+  rm -r build
+  rm discloner
+  echo "Done."
 }
 
 install()
