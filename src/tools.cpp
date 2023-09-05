@@ -1,6 +1,7 @@
 #include "tools.hpp"
 
 #include <algorithm>
+#include <cstdlib>
 #include <cstring>
 #include <regex>
 
@@ -8,21 +9,19 @@
 
 namespace tools {
 
-template <typename T> T extract_number(std::string str) {
-  std::string buff(str);
+int extract_number(std::string str) {
+  std::string buff("");
+  int value = 0;
 
-  buff.erase(std::remove_if(buff.begin(), buff.end(),
-                            [](char c) { return std::isdigit(c); }),
-             str.end());
+  for (const auto &c : str) {
+    if (std::isdigit(c))
+      buff += c;
+  }
 
   if (buff.compare("") == 0)
     return 0;
 
-  std::stringstream num;
-  num << buff;
-
-  T value;
-  num >> value;
+  value = std::atoi(buff.c_str());
 
   return value;
 }
@@ -45,13 +44,13 @@ bool check_if_includes_str(std::vector<std::string> vec, std::string element) {
 }
 
 ulong size_str_to_ulong(std::string str) {
-  uint input_value = extract_number<uint>(str);
+  ulong input_value = extract_number(str);
 
-  const std::regex b_regex("\\d+B|b");
-  const std::regex kb_regex("\\d+KB|kb");
-  const std::regex mb_regex("\\d+MB|mb");
-  const std::regex gb_regex("\\d+GB|gb");
-  const std::regex tb_regex("\\d+TB|tb");
+  const std::regex b_regex("[0-9]+[Bb]+");
+  const std::regex kb_regex("[0-9]+[KBkb]+");
+  const std::regex mb_regex("[0-9]+[MBmb]+");
+  const std::regex gb_regex("[0-9]+[GBgb]+");
+  const std::regex tb_regex("[0-9]+[TBtb]+");
 
   if (std::regex_match(str, b_regex))
     return input_value;
@@ -66,8 +65,5 @@ ulong size_str_to_ulong(std::string str) {
   else
     return 0;
 }
-
-template <typename T, typename U>
-bool check_if_defined_in_map(std::map<T, U> map, T key);
 
 } // namespace tools

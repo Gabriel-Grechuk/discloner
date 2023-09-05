@@ -9,13 +9,13 @@ namespace tools {
 
 template <typename T> bool check_if_includes(std::vector<T> vec, T element);
 
-template <typename T> T extract_number(std::string str);
+int extract_number(std::string str);
 
 bool check_if_includes_str(std::vector<std::string> vec, std::string element);
 
 ulong size_str_to_ulong(std::string str);
 
-template <typename T, typename U>
+template <class T, class U>
 bool check_if_defined_in_map(std::map<T, U> map, T key) {
   if (map.find(key) == map.end())
     return false;
