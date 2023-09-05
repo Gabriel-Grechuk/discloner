@@ -23,21 +23,21 @@ private:
 
   std::vector<std::string> valid_args{
       // Full string options.
-      "proc",
-      "size",
-      "blocksize",
-      "count",
-      "input",
-      "output",
-      "continue",
+      "--proc",
+      "--size",
+      "--blocksize",
+      "--count",
+      "--input",
+      "--output",
+      "--continue",
 
       // Short options.
-      "j",
-      "s",
-      "b",
-      "c",
-      "i",
-      "o"
+      "-j",
+      "-s",
+      "-b",
+      "-c",
+      "-i",
+      "-o"
   };
 
   void check_conflicting_args(std::map<std::string, std::string> arg_list);

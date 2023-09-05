@@ -6,7 +6,6 @@
 #include <vector>
 
 namespace tools {
-std::string normalize_str(std::string str);
 
 template <typename T> bool check_if_includes(std::vector<T> vec, T element);
 

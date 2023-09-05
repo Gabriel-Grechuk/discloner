@@ -1,5 +1,4 @@
 #include <cstring>
-#include <iostream>
 #include <string>
 
 #include "config.hpp"
@@ -14,12 +13,11 @@ Config::Config(int argc, char **argv) {
   std::vector<std::string> args;
 
   for (uint i = 0; i < argc; i++) {
-    std::string buff;
-    buff.copy(argv[i], std::strlen(argv[i]));
+    std::string buff(argv[i]);
     args.push_back(buff);
   }
 
-  for (ubyte i = 0; i <= argc; i++) {
+  for (ubyte i = 0; i < argc; i++) {
     if (tools::check_if_includes_str(valid_args, args[i]))
       mapped_args[args[i]] = args[i + 1];
   }
@@ -31,48 +29,49 @@ void Config::check_conflicting_args(
     std::map<std::string, std::string> arg_list) {
 
   if (tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                               "proc") &&
-      tools::check_if_defined_in_map<std::string, std::string>(arg_list, "j")) {
+                                                               "--proc") &&
+      tools::check_if_defined_in_map<std::string, std::string>(arg_list,
+                                                               "-j")) {
     io::error("Option --proc conflicting with -j");
     exit(1);
   }
 
   else if (tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "size") &&
+                                                                    "--size") &&
            tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "s")) {
+                                                                    "-s")) {
     io::error("Option --size conflicting with -s");
     exit(1);
   }
 
   else if (tools::check_if_defined_in_map<std::string, std::string>(
-               arg_list, "blocksize") &&
+               arg_list, "--blocksize") &&
            tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "b")) {
+                                                                    "-b")) {
     io::error("Option --blocksize conflicting with -b");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "count") &&
+  else if (tools::check_if_defined_in_map<std::string, std::string>(
+               arg_list, "--count") &&
            tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "c")) {
+                                                                    "-c")) {
     io::error("Option --count conflicting with -c");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "input") &&
+  else if (tools::check_if_defined_in_map<std::string, std::string>(
+               arg_list, "--input") &&
            tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "i")) {
+                                                                    "-i")) {
     io::error("Option --input conflicting with -i");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "output") &&
+  else if (tools::check_if_defined_in_map<std::string, std::string>(
+               arg_list, "--output") &&
            tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "o")) {
+                                                                    "-o")) {
     io::error("Option --output conflicting with -o");
     exit(1);
   }

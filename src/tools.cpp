@@ -3,31 +3,13 @@
 #include <algorithm>
 #include <cstring>
 #include <regex>
-#include <sstream>
 
 #include "consts.hpp"
 
 namespace tools {
 
-std::string normalize_str(std::string str) {
-  char *bf;
-  std::strcpy(bf, str.c_str());
-  std::string buff;
-  buff.copy(bf, str.length());
-
-  buff.erase(
-      std::remove_if(buff.begin(), buff.end(),
-                     [](char c) { return std::isspace(c) || std::isalpha(c); }),
-      str.end());
-
-  return buff;
-}
-
 template <typename T> T extract_number(std::string str) {
-  char *bf;
-  std::strcpy(bf, str.c_str());
-  std::string buff;
-  buff.copy(bf, str.length());
+  std::string buff(str);
 
   buff.erase(std::remove_if(buff.begin(), buff.end(),
                             [](char c) { return std::isdigit(c); }),
