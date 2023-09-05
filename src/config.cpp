@@ -1,4 +1,5 @@
 #include <cstring>
+#include <iostream>
 #include <string>
 
 #include "config.hpp"
@@ -12,7 +13,7 @@ Config::Config(int argc, char **argv) {
   std::map<std::string, std::string> mapped_args;
   std::vector<std::string> args;
 
-  for (uint i = 0; i <= argc; i++) {
+  for (uint i = 0; i < argc; i++) {
     std::string buff;
     buff.copy(argv[i], std::strlen(argv[i]));
     args.push_back(buff);
