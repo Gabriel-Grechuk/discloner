@@ -6,6 +6,10 @@
 #include "io.hpp"
 #include "tools.hpp"
 
+#define CHECK_REDEFINED(x, y)                                                  \
+  (tools::check_if_defined_in_map<std::string, std::string>(arg_list, x) &&    \
+   tools::check_if_defined_in_map<std::string, std::string>(arg_list, y))
+
 namespace config {
 
 Config::Config(int argc, char **argv) {
@@ -28,50 +32,32 @@ Config::Config(int argc, char **argv) {
 void Config::check_conflicting_args(
     std::map<std::string, std::string> arg_list) {
 
-  if (tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                               "--proc") &&
-      tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                               "-j")) {
+  if (CHECK_REDEFINED("--proc", "-j")) {
     io::error("Option --proc conflicting with -j");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "--size") &&
-           tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "-s")) {
+  else if (CHECK_REDEFINED("--size", "-s")) {
     io::error("Option --size conflicting with -s");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(
-               arg_list, "--blocksize") &&
-           tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "-b")) {
+  else if (CHECK_REDEFINED("--blocksize", "-b")) {
     io::error("Option --blocksize conflicting with -b");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(
-               arg_list, "--count") &&
-           tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "-c")) {
+  else if (CHECK_REDEFINED("--count", "-c")) {
     io::error("Option --count conflicting with -c");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(
-               arg_list, "--input") &&
-           tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "-i")) {
+  else if (CHECK_REDEFINED("--input", "-i")) {
     io::error("Option --input conflicting with -i");
     exit(1);
   }
 
-  else if (tools::check_if_defined_in_map<std::string, std::string>(
-               arg_list, "--output") &&
-           tools::check_if_defined_in_map<std::string, std::string>(arg_list,
-                                                                    "-o")) {
+  else if (CHECK_REDEFINED("--output", "-o")) {
     io::error("Option --output conflicting with -o");
     exit(1);
   }
