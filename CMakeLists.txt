@@ -13,5 +13,5 @@ PROJECT(discloner
 SET(CMAKE_CXX_STANDARD 17)
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -DDEBUG")
 
-ADD_EXECUTABLE(discloner src/main.cpp src/config.cpp src/tools.cpp)
+ADD_EXECUTABLE(discloner src/main.cpp src/config.cpp src/tools.cpp src/sys.cpp)
 
