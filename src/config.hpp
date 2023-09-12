@@ -6,41 +6,44 @@
 #include <vector>
 
 #include "consts.hpp"
+#include "sys.hpp"
 
 namespace config {
 
 class Config {
 public:
-  Config(int argc, char **argv);
+  Config(const int argc, const char **argv);
+
+  // Getters.
+  ulong get_size() { return size; }
+  uint get_block_size() { return block_size; }
+  ulong get_count() { return count; }
+  ubyte get_threads_count() { return threads_count; }
+  std::string get_input_file() { return input_file; }
+  std::vector<std::string> get_output_files() { return output_files; }
+
+  void print_loaded_args();
 
 private:
   ulong size = 0;
   uint block_size = 512;
-  ulong count = 1;
-  ubyte threads_count = 1;
+  ulong count = 0;
+  ubyte threads_count = sys::get_cpu_count();
+  bool continue_last_process = false;
   std::string input_file = "";
-  std::string output_file = "";
+  std::vector<std::string> output_files;
 
-  std::vector<std::string> valid_args{
-      // Full string options.
-      "--proc",
-      "--size",
-      "--blocksize",
-      "--count",
-      "--input",
-      "--output",
-      "--continue",
+  std::vector<std::string> valid_args{// Full string options.
+                                      "--proc", "--size", "--blocksize",
+                                      "--count", "--input", "--output",
+                                      "--continue",
 
-      // Short options.
-      "-j",
-      "-s",
-      "-b",
-      "-c",
-      "-i",
-      "-o"
-  };
+                                      // Short options.
+                                      "-j", "-s", "-b", "-c", "-i", "-o"};
 
-  void check_conflicting_args(std::map<std::string, std::string> arg_list);
+  std::vector<std::pair<std::string, std::string>>
+  validate_args(const int argc, const char **argv);
+  bool check_if_arg_str(const char *str);
 };
 
 } // namespace config
