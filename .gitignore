@@ -37,3 +37,4 @@
 # Default build dir.
 build/
 discloner
+.ccls-cache/
