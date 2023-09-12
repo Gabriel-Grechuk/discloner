@@ -17,7 +17,7 @@ template <class... Args> void info(Args... args) {
 
 template <class... Args> void log(Args... args) {
 
-  (std::cout << "\033[1m\033[32m>\033[0m " << ... << args) << "\n";
+  (std::cout << ... << args) << "\n";
 }
 
 } // namespace io
